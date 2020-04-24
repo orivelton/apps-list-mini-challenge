@@ -1,11 +1,21 @@
-import React from 'react';
-import Apps from '../mock/apps.json';
+import React, { useEffect, useState } from 'react';
+import { getApps } from '../api/get';
 
 const List = () => {
+
+  const [list, setList] = useState([]);
+
+  const loadData = async () => {
+    const result = await getApps();
+    setList(result);
+  }
+
+  useEffect(() => { loadData();}, []);
+
   return (
     <ul>
       {
-        Apps.map((
+        list.map((
           { name, id, description, categories, subscriptions }
         ) => (
           <li key={id}>
