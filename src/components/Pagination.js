@@ -6,7 +6,6 @@ const Pagination = ({pages}) => {
       <li>
         <button>&lt;</button>
       </li>
-      {console.log(pages)}
       {
         pages && [...Array(pages)].map((item, index) => {
           return (

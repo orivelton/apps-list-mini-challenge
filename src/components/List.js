@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Pagination from './Pagination';
 import { getApps } from '../api/get';
+import config from '../consts/config';
 
 const List = () => {
   const [list, setList] = useState([]);
@@ -9,10 +10,10 @@ const List = () => {
   const loadData = async () => {
     const result = await getApps();
     setList(result);
-    setPages(Math.ceil(result.length / 3))
+    setPages(Math.ceil(result.length / config.pages))
   }
 
-  useEffect(() => { loadData();}, []);
+  useEffect(() => { loadData(); }, []);
 
   return (
     <>
