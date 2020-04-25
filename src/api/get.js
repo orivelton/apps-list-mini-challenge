@@ -1,8 +1,8 @@
-import axios from 'axios';
+import { get } from 'axios';
 import urls from '../consts/urls';
 
-const getApps = async () => {
-  const result = await axios.get(urls.apps);
+const getApps = async (url = urls.apps) => {
+  const result = await get(url);
   const { data } = result;
   return data;
 };
