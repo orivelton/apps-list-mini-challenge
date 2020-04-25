@@ -3,6 +3,7 @@ import { getApps } from '../api/get';
 import config from '../consts/config';
 import { formatData } from '../ultils/helpers';
 import Search from './Search';
+import Pagination from './Pagination';
 
 const List = () => {
   const [list, setList] = useState([]);
@@ -34,10 +35,13 @@ const List = () => {
     setList(chunk[index - 1]);
   }
 
+  const propsSearch = {searchTerm, setSearchTerm};
+  const propsPagination = {currentPage, handleCurrentPage, pages}
+
   return (
     <>
       <p>{searchTerm}</p>  
-      <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+      <Search {...propsSearch} />
       <ul>
         {
           list.map((
@@ -76,25 +80,7 @@ const List = () => {
         }
       </ul>
 
-      <ul className="pagination">
-        <li>
-          <button onClick={() => { handleCurrentPage(currentPage - 1)}} disabled={currentPage === 1}>&lt;</button>
-        </li>
-        {
-          pages && [...Array(pages)].map((item, index) => (
-            <li 
-              key={`${index}${item}`}
-              className={currentPage === (index + 1) ? 'active' : ''}
-              onClick={() => { handleCurrentPage(index)}}
-            >
-              <button>{++index}</button>
-            </li>
-          ))
-        }
-        <li>
-          <button onClick={() => { handleCurrentPage(currentPage + 1)}} disabled={currentPage === pages}>&gt;</button>
-        </li>
-      </ul>
+      <Pagination {...propsPagination} />
     </>
   )
 };
