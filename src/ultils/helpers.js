@@ -1,5 +1,16 @@
+/* eslint-disable no-extend-native */
+import config from '../consts/config';
+
 
 const sortByascending = (a,b) => (a.total > b.total) ? 1 : ((b.total > a.total) ? -1 : 0);
+
+Object.defineProperty(Array.prototype, 'chunk', {
+  value: function(chunkSize){
+      var chunks = [];
+      for (var i = 0; i < this.length; i+= chunkSize) chunks.push(this.slice(i,i+chunkSize))
+      return chunks;
+  }
+});
 
 const formatData = data => {
   const formated = data.map(item => {
@@ -10,7 +21,7 @@ const formatData = data => {
     return {...item, total};
   }).sort(sortByascending);
   
-  return formated;
+  return formated.chunk(config.pages);
 }
 
 export { formatData };
