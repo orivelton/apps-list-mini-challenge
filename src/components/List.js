@@ -6,7 +6,7 @@ import { formatData } from '../ultils/helpers';
 const List = () => {
   const [list, setList] = useState([]);
   const [pages, setPages] = useState();
-  const [currentPage, setCurrentPage] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
   const [chunk, setChunk] = useState();
   
   useEffect(() => { 
@@ -22,15 +22,14 @@ const List = () => {
     loadData(); 
   },[]);
 
-  const handleCurrentPage = (index) => {
+  const handleCurrentPage = index => {
     setCurrentPage(index);
-    setList(chunk[currentPage]);
+    setList(chunk[index - 1]);
   }
 
   return (
     <>
       <ul>
-        {currentPage}
         {
           list.map((
             { name, id, description, categories, subscriptions }
@@ -70,19 +69,21 @@ const List = () => {
 
       <ul className="pagination">
         <li>
-          <button onClick={() => { handleCurrentPage(currentPage - 1)} }>&lt;</button>
+          <button onClick={() => { handleCurrentPage(currentPage - 1)}} disabled={currentPage === 1}>&lt;</button>
         </li>
         {
-          pages && [...Array(pages)].map((item, index) => {
-            return (
-              <li key={`${index}${item}`}  className="active" onClick={() => { handleCurrentPage(index)} }>
-                <button>{++index}</button>
-              </li>
-            )
-          })
+          pages && [...Array(pages)].map((item, index) => (
+            <li 
+              key={`${index}${item}`}
+              className={currentPage === (index + 1) ? 'active' : ''}
+              onClick={() => { handleCurrentPage(index)}}
+            >
+              <button>{++index}</button>
+            </li>
+          ))
         }
         <li>
-          <button onClick={() => { handleCurrentPage(currentPage + 1)} }>&gt;</button>
+          <button onClick={() => { handleCurrentPage(currentPage + 1)}} disabled={currentPage === pages}>&gt;</button>
         </li>
       </ul>
     </>
