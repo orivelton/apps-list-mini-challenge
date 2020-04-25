@@ -13,8 +13,6 @@ const Pagination = ({pages}) => {
           )
         })
       }
-      
-      {/* <li ><a href="/">2</a></li> */}
       <li>
         <button>&gt;</button>
       </li>

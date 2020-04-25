@@ -1,24 +1,36 @@
 import React, { useEffect, useState } from 'react';
-import Pagination from './Pagination';
 import { getApps } from '../api/get';
 import config from '../consts/config';
 import { formatData } from '../ultils/helpers';
 
 const List = () => {
   const [list, setList] = useState([]);
-  const [pages, setPages] = useState()
+  const [pages, setPages] = useState();
+  const [currentPage, setCurrentPage] = useState(0);
+  const [chunk, setChunk] = useState();
   
-  const loadData = async () => {
-    const result = await getApps();
-    setList(formatData(result));
-    setPages(Math.ceil(result.length / config.pages))
-  }
+  useEffect(() => { 
+    const loadData = async () => {
+      const data = await getApps();
+      const result = formatData(data)
+      const [firstPage] = result;
+      setChunk(result);
+      setList(firstPage);
+      setPages(Math.ceil(data.length / config.pages));
+    }
+    
+    loadData(); 
+  },[]);
 
-  useEffect(() => { loadData(); }, []);
+  const handleCurrentPage = (index) => {
+    setCurrentPage(index);
+    setList(chunk[currentPage]);
+  }
 
   return (
     <>
       <ul>
+        {currentPage}
         {
           list.map((
             { name, id, description, categories, subscriptions }
@@ -56,7 +68,23 @@ const List = () => {
         }
       </ul>
 
-      <Pagination pages={pages}/>
+      <ul className="pagination">
+        <li>
+          <button onClick={() => { handleCurrentPage(currentPage - 1)} }>&lt;</button>
+        </li>
+        {
+          pages && [...Array(pages)].map((item, index) => {
+            return (
+              <li key={`${index}${item}`}  className="active" onClick={() => { handleCurrentPage(index)} }>
+                <button>{++index}</button>
+              </li>
+            )
+          })
+        }
+        <li>
+          <button onClick={() => { handleCurrentPage(currentPage + 1)} }>&gt;</button>
+        </li>
+      </ul>
     </>
   )
 };
