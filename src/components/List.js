@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { getApps } from '../api/get';
 import config from '../consts/config';
 import { formatData } from '../ultils/helpers';
+import Search from './Search';
 
 const List = () => {
   const [list, setList] = useState([]);
   const [pages, setPages] = useState();
   const [currentPage, setCurrentPage] = useState(1);
   const [chunk, setChunk] = useState();
+  const [searchTerm, setSearchTerm] = useState('');
   
   useEffect(() => { 
     const loadData = async () => {
@@ -22,6 +24,11 @@ const List = () => {
     loadData(); 
   },[]);
 
+  useEffect(() => {
+    console.log(searchTerm);
+  }, [searchTerm])
+
+
   const handleCurrentPage = index => {
     setCurrentPage(index);
     setList(chunk[index - 1]);
@@ -29,6 +36,8 @@ const List = () => {
 
   return (
     <>
+      <p>{searchTerm}</p>  
+      <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       <ul>
         {
           list.map((
