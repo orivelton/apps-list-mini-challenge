@@ -1,10 +1,10 @@
-import axios from 'axios';
+import { get } from 'axios';
+import urls from '../consts/config';
 
-
-const getApps = async () => {
-  console.log('here')
-  const result = await axios.get('../mock/apps.json');
-  console.log('>>>>>>', result.json())
+const getApps = async (url = urls.apps) => {
+  const result = await get(url);
+  const { data } = result;
+  return data;
 };
 
 export { getApps };

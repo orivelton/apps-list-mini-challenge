@@ -1,13 +1,23 @@
 import React from 'react';
 
-const Pagination = () => {
+const Pagination = ({pages}) => {
   return (
     <ul className="pagination">
-      <li><a href="/">&lt;</a></li>
-      <li><a href="/">1</a></li>
-      <li className="active"><a href="/">2</a></li>
-      <li><a href="/">3</a></li>
-      <li><a href="/">&gt;</a></li>
+      <li>
+        <button>&lt;</button>
+      </li>
+      {
+        pages && [...Array(pages)].map((item, index) => {
+          return (
+            <li key={`${index}${item}`} onClick={() => console.log(index)} className="active"><button>{++index}</button></li>
+          )
+        })
+      }
+      
+      {/* <li ><a href="/">2</a></li> */}
+      <li>
+        <button>&gt;</button>
+      </li>
     </ul>
   )
 };

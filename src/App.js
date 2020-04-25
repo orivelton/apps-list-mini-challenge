@@ -2,8 +2,8 @@ import React from 'react';
 import './App.scss';
 import Nav from './components/Nav';
 import Search from './components/Search';
-import Pagination from './components/Pagination';
 import List from './components/List';
+import Loading from './components/Loading';
 
 const App = () => {
   return (
@@ -11,8 +11,8 @@ const App = () => {
       <Nav />
       <section className="apps-list">
         <Search />
+        <Loading />
         <List />
-        <Pagination />
       </section>
     </div>
   );

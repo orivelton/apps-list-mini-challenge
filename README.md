@@ -1,5 +1,17 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Tasks
+
+- [ ] List all the apps
+- [ ] Paginate the list (page size = 3)
+- [ ] Filter the apps as you type in the search bar
+- [ ] Have all the existing categories in the left navigation sorted by alphabetic order
+- [ ] Allow filtering of apps when we click on a category
+- [ ] Apps should be sorted by ascending order of the sum of the plans price
+
+
+
+
 ## Available Scripts
 
 In the project directory, you can run:
