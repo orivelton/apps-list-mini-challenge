@@ -1,5 +1,5 @@
 import React from 'react';
-import useLoading from '../shared/state/useLoading';
+import useLoading from '../ultils/state/useLoading';
 
 const Loading = () => {
   const [load] = useLoading();

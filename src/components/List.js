@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Pagination from './Pagination';
 import { getApps } from '../api/get';
 import config from '../consts/config';
+import { formatData } from '../ultils/helpers';
 
 const List = () => {
   const [list, setList] = useState([]);
@@ -9,7 +10,7 @@ const List = () => {
   
   const loadData = async () => {
     const result = await getApps();
-    setList(result);
+    setList(formatData(result));
     setPages(Math.ceil(result.length / config.pages))
   }
 
@@ -31,7 +32,7 @@ const List = () => {
                       <p>{description}</p>
                     </div>
                     <div className="tags">
-                      { categories.sort().map(item => <span key={item}>{item} {'/'}</span>) }
+                      { categories.map(item => <span key={item}>{item} {'/'}</span>) }
                     </div>
                   </div>
                   <div className="box-info--footer">
