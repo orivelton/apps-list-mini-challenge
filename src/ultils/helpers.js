@@ -1,5 +1,6 @@
 /* eslint-disable no-extend-native */
 import config from '../consts/config';
+const {pageSize} = config;
 
 
 const sortByascending = (a,b) => (a.total > b.total) ? 1 : ((b.total > a.total) ? -1 : 0);
@@ -21,7 +22,7 @@ const formatData = data => {
     return {...item, total};
   }).sort(sortByascending);
   
-  return formated.chunk(config.pages);
+  return formated.chunk(pageSize);
 }
 
 export { formatData };

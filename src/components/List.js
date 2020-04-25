@@ -6,29 +6,47 @@ import Search from './Search';
 import Pagination from './Pagination';
 import ListItem from './ListItem';
 
+const {pageSize} = config;
+
 const List = () => {
   const [list, setList] = useState([]);
+  const [initialList, setInitialList] = useState([]);
   const [pages, setPages] = useState();
   const [currentPage, setCurrentPage] = useState(1);
-  const [chunk, setChunk] = useState();
+  const [chunk, setChunk] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [notFound, setNotFound] =useState(false);
   
   useEffect(() => { 
     const loadData = async () => {
       const data = await getApps();
-      const result = formatData(data)
-      const [firstPage] = result;
-      setChunk(result);
-      setList(firstPage);
-      setPages(Math.ceil(data.length / config.pages));
+      updateView(data);
+      setInitialList(data);
     }
     
     loadData(); 
   },[]);
-
+  
   useEffect(() => {
-    console.log(searchTerm);
-  }, [searchTerm])
+    if(!searchTerm) {
+      initialList.length && updateView(initialList);
+      return;
+    };
+    const search = chunk.flat().filter(({name}) => name.includes(searchTerm));
+    search.length ? updateView(search) : setNotFound(true);
+  }, [searchTerm]);
+
+  
+  const countPage = (dataLength) => setPages(Math.ceil( dataLength / pageSize));
+
+  const updateView = (data) => {
+    const result = formatData(data)
+    const [firstPage] = result;
+    setNotFound(false)
+    setChunk(result);
+    setList(firstPage);
+    countPage(data.length);
+  }
 
 
   const handleCurrentPage = index => {
@@ -43,14 +61,14 @@ const List = () => {
     <>
       <p>{searchTerm}</p>  
       <Search {...propsSearch} />
-
+      {notFound && <p>no results found</p>}
       <ul>
         {
-          list.map((item) => <ListItem key={item.id} {...item}/>)
+          (list && !notFound) && list.map((item) => <ListItem key={item.id} {...item}/>)
         }
       </ul>
 
-      <Pagination {...propsPagination} />
+      {!notFound && <Pagination {...propsPagination} />}
     </>
   )
 };
