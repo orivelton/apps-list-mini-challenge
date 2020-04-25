@@ -31,7 +31,7 @@ const List = () => {
                       <p>{description}</p>
                     </div>
                     <div className="tags">
-                      { categories.map(item => <span key={item}>{item} {'/'}</span>) }
+                      { categories.sort().map(item => <span key={item}>{item} {'/'}</span>) }
                     </div>
                   </div>
                   <div className="box-info--footer">
