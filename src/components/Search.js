@@ -1,14 +1,14 @@
 import React from 'react';
 
-const Search = ({searchTerm, setSearchTerm, setIsCategories}) => {
-  const handleChange = event  => {
-    setSearchTerm(event.target.value);
-    setIsCategories(false);
-  };
-
+const Search = ({valueSearch, handleSearchTerm, setIsCategories}) => {
   return (
     <header>
-      <input type="text" placeholder="Search by App" value={searchTerm} onChange={handleChange} />
+      <input 
+        type="text" 
+        placeholder="Search by App" 
+        value={valueSearch} 
+        onChange={({target: { value}}) => handleSearchTerm(value)}
+      />
     </header>
   )
 };
