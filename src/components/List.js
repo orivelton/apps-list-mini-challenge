@@ -82,7 +82,6 @@ import { formatData, countPage, handleSearch } from '../ultils/helpers';
     const {searchTerm, valueSearch, notFound, list, currentPage, pages} = this.state;
     const propsSearch = {searchTerm, valueSearch, handleCategories: this.handleCategories, handleSearchTerm: this.handleSearchTerm};
     const propsPagination = {currentPage, pages, handleCurrentPage: this.handleCurrentPage};
-    const propsListItem = {handleSearchTerm: this.handleSearchTerm}
 
     return (
       <>
@@ -97,14 +96,14 @@ import { formatData, countPage, handleSearch } from '../ultils/helpers';
                 <ListItem
                   key={item.id}
                   {...item}
-                  {...propsListItem}
+                  handleCategories={this.handleCategories}
                 />
               )
             }
           </ul>
         }
 
-        {!notFound && <Pagination {...propsPagination} />}
+        {(!notFound && pages !== 1) && <Pagination {...propsPagination} />}
     </>
     )
   }

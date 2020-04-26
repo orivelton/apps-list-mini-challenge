@@ -1,11 +1,12 @@
-import React from 'react'
+import React from 'react';
+import config from '../consts/config';
+const { currency } = config;
 
 const ListItem = ({
   name,
   description,
   categories,
   subscriptions,
-  handleSearchTerm,
   handleCategories
 }) => (
   <li>
@@ -17,12 +18,12 @@ const ListItem = ({
             <p>{description}</p>
           </div>
           <div className="tags">
-            { categories && categories.map(item => 
+            { categories && categories.map((item, index) => 
                 <span
-                  onClick={() => { handleCategories(item);}}
+                  onClick={() => {handleCategories(item)}}
                   key={item}
                 >
-                    {item} {'/'}
+                  {`${item} ${categories.length !== ++index ? '/ ' : ''}`}
                 </span>
               )
             }
@@ -35,7 +36,8 @@ const ListItem = ({
                 <li key={name}>
                   <span>{name}</span>
                   <h3>
-                    {price}<sup>€</sup>
+                    {price ? price : 'Free'}
+                    <sup>{price ? currency : false}</sup>
                   </h3>
                 </li>
               )
