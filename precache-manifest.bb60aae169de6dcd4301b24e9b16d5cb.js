@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "2fcbe6d64d2abd1a372b978a2d4a1d60",
+    "revision": "280ff21e8bfaf27d5e072c254ba76974",
     "url": "/apps-list-mini-challenge/index.html"
   },
   {
-    "revision": "23cee2e1fc3dc20e9093",
+    "revision": "c11ddf3d28d7bb124a3d",
     "url": "/apps-list-mini-challenge/static/css/main.69a3b7b8.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/apps-list-mini-challenge/static/js/2.d0dac34a.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "23cee2e1fc3dc20e9093",
-    "url": "/apps-list-mini-challenge/static/js/main.65880134.chunk.js"
+    "revision": "c11ddf3d28d7bb124a3d",
+    "url": "/apps-list-mini-challenge/static/js/main.0e22bce2.chunk.js"
   },
   {
     "revision": "d445e22a0773a10c8330",
