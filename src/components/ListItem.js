@@ -17,13 +17,13 @@ const ListItem = ({
             <p>{description}</p>
           </div>
           <div className="tags">
-            { categories.map(item => <span onClick={() => { setSearchTerm(item); setIsCategories(true)}} key={item}>{item} {'/'}</span>) }
+            { categories && categories.map(item => <span onClick={() => { setSearchTerm(item); setIsCategories(true)}} key={item}>{item} {'/'}</span>) }
           </div>
         </div>
         <div className="box-info--footer">
           <ul>
             {
-              subscriptions.map(({name, price}) => 
+              subscriptions && subscriptions.map(({name, price}) => 
                 <li key={name}>
                   <span>{name}</span>
                   <h3>

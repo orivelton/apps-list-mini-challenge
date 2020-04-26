@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { getApps } from '../api/get';
 import { formatData, countPage, handleSearch } from '../ultils/helpers';

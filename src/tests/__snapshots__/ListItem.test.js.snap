@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<li>
+  <div
+    className="app-item"
+  >
+    <div
+      className="box-info"
+    >
+      <div
+        className="box-info--content"
+      >
+        <div
+          className="description"
+        >
+          <h1 />
+          <p />
+        </div>
+        <div
+          className="tags"
+        />
+      </div>
+      <div
+        className="box-info--footer"
+      >
+        <ul />
+      </div>
+    </div>
+  </div>
+</li>
+`;
