@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.scss';
 import Nav from './components/Nav';
 import List from './components/List';
 
