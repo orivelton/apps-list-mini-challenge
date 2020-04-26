@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ListItem = ({ name, description, categories, subscriptions }) => (
+const ListItem = ({ name, description, categories, subscriptions, setSearchByCategories}) => (
   <li>
     <div className="app-item">
       <div className="box-info">
@@ -10,7 +10,7 @@ const ListItem = ({ name, description, categories, subscriptions }) => (
             <p>{description}</p>
           </div>
           <div className="tags">
-            { categories.map(item => <span key={item}>{item} {'/'}</span>) }
+            { categories.map(item => <span onClick={() => setSearchByCategories(item)} key={item}>{item} {'/'}</span>) }
           </div>
         </div>
         <div className="box-info--footer">
