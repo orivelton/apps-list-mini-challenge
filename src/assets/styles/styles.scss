@@ -93,25 +93,39 @@ input {
   }
 }
 
-.nav-menu a {
-  position: relative;
-  display: block;
-  padding: 1rem;
-  font-size: 17px;
-  font-weight: 300;
-  color: #202121;
-  cursor: pointer;
-  background: #f4f7f6;
-  border-bottom: 1px solid #E6EAEA;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  .active a {
-    color: var(--teal);
+.nav-menu {
+  button {
+    width: 100%;
+    text-align: left;
+    position: relative;
+    display: block;
+    padding: 1rem;
+    font-size: 17px;
+    font-weight: 300;
+    color: #202121;
+    cursor: pointer;
+    background: #f4f7f6;
+    border: 0;
+    border-bottom: 1px solid #E6EAEA;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    outline: none;;
     &:hover {
       background-color: var(--white);
       -webkit-transition: background 0.3s ease-in-out;
       transition: background 0.3s ease-in-out;
     }
+  }
+
+  .active {
+    color: var(--teal);
+  }
+
+
+  &:focus {
+    transition: all .2s ease;
+    cursor: auto;
+    border: 0;
   }
 }
 
