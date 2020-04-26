@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Search = ({searchTerm, setSearchTerm, setIsCategories, setSearchByCategories}) => {
+const Search = ({searchTerm, setSearchTerm, setIsCategories}) => {
   const handleChange = event  => {
     setSearchTerm(event.target.value);
     setIsCategories(false);

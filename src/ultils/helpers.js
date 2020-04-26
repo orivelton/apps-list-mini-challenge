@@ -4,6 +4,14 @@ const {pageSize} = config;
 
 
 const sortByascending = (a,b) => (a.total > b.total) ? 1 : ((b.total > a.total) ? -1 : 0);
+const countPage = (dataLength, setPages) => setPages(Math.ceil( dataLength / pageSize));
+
+const handleSearch = (chunk, isCategories, searchTerm) => {
+  return chunk.flat().filter((
+    {name, categories}
+  ) => isCategories ? categories.includes(searchTerm) : name.toLowerCase().includes(searchTerm.toLowerCase()));
+};
+
 
 Object.defineProperty(Array.prototype, 'chunk', {
   value: function(chunkSize){
@@ -25,4 +33,4 @@ const formatData = data => {
   return formated.chunk(pageSize);
 }
 
-export { formatData };
+export { formatData, countPage, handleSearch };
