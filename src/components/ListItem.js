@@ -1,5 +1,5 @@
 import React from 'react';
-import config from '../consts/config';
+import config from '../config/configs';
 const { currency } = config;
 
 const ListItem = ({

@@ -1,5 +1,5 @@
 /* eslint-disable no-extend-native */
-import config from '../consts/config';
+import config from '../config/configs';
 const {pageSize} = config;
 
 

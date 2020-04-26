@@ -24,7 +24,7 @@ const Nav = ({initialState, handleCategories, categoriesActive}) => {
       <h2>Categories</h2>
       <ul className="nav-menu">
         {
-          categories.length && categories.map(item => (
+          categories.length > 0 && categories.map(item => (
             <li key={item} >
               <button 
                 href="/"
@@ -35,7 +35,6 @@ const Nav = ({initialState, handleCategories, categoriesActive}) => {
             </li>
           ))
         }
-        {/* <li className="active"><a href="/">Channels</a></li> */}
       </ul>
     </nav>
   );
