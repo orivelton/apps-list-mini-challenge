@@ -56,12 +56,12 @@ h3 {
   text-align: center;
   max-width: 1400px;
   margin: 2rem auto;
+  > * {
+    padding: 15px;
+    flex: 1 100%;
+  }
 }
 
-.flex-container > * {
-  padding: 15px;
-  flex: 1 100%;
-}
 
 header {
   display: flex;
@@ -69,29 +69,28 @@ header {
 }
 
 
-input[type=search],
-input[type=text] {
-  font-size: 1rem;
-  font-weight: 300;
-  background-clip: padding-box;
-  transition: all .2s ease;
-  outline: 0;
-  -webkit-appearance: none;
-  width: 100%;
-  resize: none;
-  padding: 1rem;
-  border: 1px solid var(--gray);
-  margin-bottom: 2rem;
-}
+input {
+  &[type=search],
+  &[type=text] {
+    font-size: 1rem;
+    font-weight: 300;
+    background-clip: padding-box;
+    transition: all .2s ease;
+    outline: 0;
+    -webkit-appearance: none;
+    width: 100%;
+    resize: none;
+    padding: 1rem;
+    border: 1px solid var(--gray);
+    margin-bottom: 2rem;
+  }
 
-input:hover, input:focus {
-  transition: all .2s ease;
-  cursor: auto;
-  border: 1px solid var(--teal);
-}
-
-.nav-menu .active a {
-  color: var(--teal);
+  &:hover, 
+  &:focus {
+    transition: all .2s ease;
+    cursor: auto;
+    border: 1px solid var(--teal);
+  }
 }
 
 .nav-menu a {
@@ -106,12 +105,14 @@ input:hover, input:focus {
   border-bottom: 1px solid #E6EAEA;
   text-decoration: none;
   transition: all 0.3s ease;
-}
-
-.nav-menu a:hover {
-  background-color: var(--white);
-  -webkit-transition: background 0.3s ease-in-out;
-  transition: background 0.3s ease-in-out;
+  .active a {
+    color: var(--teal);
+    &:hover {
+      background-color: var(--white);
+      -webkit-transition: background 0.3s ease-in-out;
+      transition: background 0.3s ease-in-out;
+    }
+  }
 }
 
 .app-item {
@@ -120,10 +121,6 @@ input:hover, input:focus {
   -webkit-transition: background 0.3s ease-in-out;
   transition: background 0.3s ease-in-out;
   box-shadow: 0 2px 3px 0 #e8ebed, 0 0 3px 0 #e8ebed;
-}
-
-.box-info:hover{
-  background-color: rgba(244,247,246,0.3);
 }
 
 .box-info {
@@ -135,51 +132,48 @@ input:hover, input:focus {
   background-color: var(--white);
   margin-bottom: 1.5rem;
   cursor: pointer;
-}
+  &--content {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+  }
 
-.box-info--content {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 1.5rem;
-}
+  &--footer {
+    display: flex;
+    ul {
+      display: inline-flex;
+      li {
+        display: inline-flex;
+        align-items: baseline;
+        padding: 0 1rem 0 0;
+        span {
+          color: var(--gray-dark);
+        }
+      }
+    }
+  }
 
-.box-info--footer {
-  display: flex;
+  &:hover{
+    background-color: rgba(244,247,246,0.3);
+  }
 }
-
-.box-info--footer ul {
-  display: inline-flex;
-}
-
-.box-info--footer li {
-  display: inline-flex;
-  align-items: baseline;
-  padding: 0 1rem 0 0;
-}
-
-.box-info--footer li span {
-  color: var(--gray-dark);
-}
-
 
 /*Nav Categories*/
 .nav-categories {
   text-align: left;
   flex: 0;
   order: 1;
-}
+  ul {
+    list-style-type: none;
+  }
 
-.nav-categories ul {
-  list-style-type: none;
-}
-
-.nav-categories li {
-  cursor: pointer;
-}
-
-.nav-categories li.selected {
-  background-color: rgb(87, 87, 206);
-  color: #FFFFFF;
+  li {
+    cursor: pointer;
+    &.selected {
+      background-color: rgb(87, 87, 206);
+      color: #FFFFFF;
+    }
+  }
 }
 
 .apps-list {
@@ -192,62 +186,53 @@ input:hover, input:focus {
   margin: 10px;
   text-align: left;
   border-bottom: 1px solid black;
-}
-
-.app ul {
-  list-style-type: none;
+  &ul {
+    list-style-type: none;
+  }
 }
 
 /*Pagination*/
 .pagination {
   text-align: center;
   order: 3;
-}
-
-.pagination {
   width: 100%;
-}
-
-.pagination {
   display: inline-flex;
   align-items: center;
   padding-left: 0;
   margin-bottom: 0;
   justify-content: center;
-}
 
-.pagination li {
-  margin-right: .25rem;
-}
+  li {
+    margin-right: .25rem;
+    &:last-child {
+      margin-right: 0;
+    }
 
-.pagination li:last-child {
-  margin-right: 0;
-}
+    button {
+      transition: all 0.3s ease-in-out;
+      color: var(--gray-dark);
+      padding: .375rem .4375rem;
+      text-decoration: none;
+      border: 0;
+      &:hover {
+        background: var(--teal);
+        color: var(--white)
+      }
 
-.pagination li button {
-  transition: all 0.3s ease-in-out;
-  color: var(--gray-dark);
-  padding: .375rem .4375rem;
-  text-decoration: none;
-  border: 0;
-}
+      &:focus {
+        box-shadow: inset 0 0 0 2px var(--teal);
+      }
 
-.pagination li button:hover {
-  background: var(--teal);
-  color: var(--white)
-}
+      &:active {
+        background: var(--gray-dark);
+        color: var(--white);
+      }
+    }
+  }
 
-.pagination li button:focus {
-  box-shadow: inset 0 0 0 2px var(--teal);
-}
-
-.pagination li button:active {
-  background: var(--gray-dark);
-  color: var(--white);
-}
-
-.pagination .active button {
-  background: var(--teal);
-  color: var(--white);
-  pointer-events: none;
+  .active button {
+    background: var(--teal);
+    color: var(--white);
+    pointer-events: none;
+  }
 }

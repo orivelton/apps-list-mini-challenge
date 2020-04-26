@@ -31,11 +31,11 @@ import { formatData, countPage, handleSearch } from '../ultils/helpers';
   updateView(data) {
     const result = formatData(data)
     const [firstPage] = result;
-    
     this.setState({
       list : firstPage,
       pages: countPage(data.length),
-      chunk: result
+      chunk: result,
+      notFound: !firstPage
     });
   };
 
