@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/apps-list-mini-challenge/static/css/main.69a3b7b8.chunk.css",
-    "main.js": "/apps-list-mini-challenge/static/js/main.64a18f49.chunk.js",
-    "main.js.map": "/apps-list-mini-challenge/static/js/main.64a18f49.chunk.js.map",
+    "main.js": "/apps-list-mini-challenge/static/js/main.65880134.chunk.js",
+    "main.js.map": "/apps-list-mini-challenge/static/js/main.65880134.chunk.js.map",
     "runtime-main.js": "/apps-list-mini-challenge/static/js/runtime-main.daf60f42.js",
     "runtime-main.js.map": "/apps-list-mini-challenge/static/js/runtime-main.daf60f42.js.map",
     "static/js/2.d0dac34a.chunk.js": "/apps-list-mini-challenge/static/js/2.d0dac34a.chunk.js",
     "static/js/2.d0dac34a.chunk.js.map": "/apps-list-mini-challenge/static/js/2.d0dac34a.chunk.js.map",
     "index.html": "/apps-list-mini-challenge/index.html",
-    "precache-manifest.b960f99a15cbeff7e0dd50d929863c2c.js": "/apps-list-mini-challenge/precache-manifest.b960f99a15cbeff7e0dd50d929863c2c.js",
+    "precache-manifest.09fb7bd752e52e0df9d90c64b7f973b9.js": "/apps-list-mini-challenge/precache-manifest.09fb7bd752e52e0df9d90c64b7f973b9.js",
     "service-worker.js": "/apps-list-mini-challenge/service-worker.js",
     "static/css/main.69a3b7b8.chunk.css.map": "/apps-list-mini-challenge/static/css/main.69a3b7b8.chunk.css.map",
     "static/js/2.d0dac34a.chunk.js.LICENSE.txt": "/apps-list-mini-challenge/static/js/2.d0dac34a.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.daf60f42.js",
     "static/js/2.d0dac34a.chunk.js",
     "static/css/main.69a3b7b8.chunk.css",
-    "static/js/main.64a18f49.chunk.js"
+    "static/js/main.65880134.chunk.js"
   ]
 }
