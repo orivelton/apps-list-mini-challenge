@@ -16,7 +16,7 @@ const List = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [initialList, setInitialList] = useState([]);
-  const [searchByCategories, setSearchByCategories] = useState('');
+  const [isCategories, setIsCategories] = useState(false);
   
   useEffect(() => { 
     const loadData = async () => {
@@ -30,27 +30,16 @@ const List = () => {
   
   useEffect(() => {
     searchView();
-  }, [searchTerm, searchByCategories]);
-
+  }, [searchTerm]);
+  
   const searchView = () => {
-    searchByCategories && setSearchTerm(searchByCategories);
-
-    if(!searchTerm) {
-      initialList.length && updateView(initialList);
+    if(!searchTerm.replace(/\s/g,'') && initialList.length && !isCategories) {
+      updateView(initialList);
       return;
     };
-    const search = chunk.flat().filter(({name, categories}) => {
-      if(searchByCategories) return categories.includes(searchByCategories);
 
-      return name.toLowerCase().includes(searchTerm.toLowerCase())
-    });
-
-    if(search.length) {
-      updateView(search);
-      setSearchByCategories('');
-    } else {
-      (!searchByCategories && search.length) && setNotFound(true)
-    }
+    const search = handleSearch();
+    search.length ? updateView(search) : setNotFound(true);
   };
 
   
@@ -59,18 +48,25 @@ const List = () => {
   const updateView = (data) => {
     const result = formatData(data)
     const [firstPage] = result;
+    setNotFound(false);
     setChunk(result);
     setList(firstPage);
     countPage(data.length);
-  }
+    setCurrentPage(1);
+  };
 
+  const handleSearch = () => {
+    return chunk.flat().filter((
+      {name, categories}
+    ) => isCategories ? categories.includes(searchTerm) : name.toLowerCase().includes(searchTerm.toLowerCase()));
+  };
 
   const handleCurrentPage = index => {
     setCurrentPage(index);
     setList(chunk[index - 1]);
-  }
+  };
 
-  const propsSearch = {searchTerm, setSearchTerm};
+  const propsSearch = {searchTerm, setSearchTerm, setIsCategories};
   const propsPagination = {currentPage, handleCurrentPage, pages};
 
   return (
@@ -81,7 +77,7 @@ const List = () => {
         !notFound &&
         <ul>
           {
-            list && list.map((item) => <ListItem key={item.id} {...item} setSearchByCategories={setSearchByCategories} />)
+            list && list.map((item) => <ListItem key={item.id} {...item} setSearchTerm={setSearchTerm} setIsCategories={setIsCategories}/>)
           }
         </ul>
       }
