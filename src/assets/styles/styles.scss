@@ -94,7 +94,9 @@ input {
 }
 
 .nav-menu {
-  a {
+  button {
+    width: 100%;
+    text-align: left;
     position: relative;
     display: block;
     padding: 1rem;
@@ -103,20 +105,28 @@ input {
     color: #202121;
     cursor: pointer;
     background: #f4f7f6;
+    border: 0;
     border-bottom: 1px solid #E6EAEA;
     text-decoration: none;
     transition: all 0.3s ease;
+    outline: none;;
+    &:hover {
+      background-color: var(--white);
+      -webkit-transition: background 0.3s ease-in-out;
+      transition: background 0.3s ease-in-out;
+    }
   }
 
   .active {
     color: var(--teal);
   }
-}
 
-.nav-menu a:hover {
-  background-color: var(--white);
-  -webkit-transition: background 0.3s ease-in-out;
-  transition: background 0.3s ease-in-out;
+
+  &:focus {
+    transition: all .2s ease;
+    cursor: auto;
+    border: 0;
+  }
 }
 
 .app-item {

@@ -26,12 +26,12 @@ const Nav = ({initialState, handleCategories, categoriesActive}) => {
         {
           categories.length && categories.map(item => (
             <li key={item} >
-              <a 
+              <button 
                 href="/"
                 className={active === item ? 'active' : ''}
                 onClick={e => handleClick(e, item)}>
                 {item}
-              </a>
+              </button>
             </li>
           ))
         }
