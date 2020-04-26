@@ -26,19 +26,18 @@ import { formatData, countPage, handleSearch } from '../ultils/helpers';
     }
     
     loadData(); 
-  }
+  };
 
   updateView(data) {
     const result = formatData(data)
     const [firstPage] = result;
-
-
+    
     this.setState({
       list : firstPage,
       pages: countPage(data.length),
       chunk: result
     });
-  }
+  };
 
   handleCurrentPage = (index) => {
     const { chunk } = this.state;
@@ -49,7 +48,15 @@ import { formatData, countPage, handleSearch } from '../ultils/helpers';
     });
   };
 
-  handleSearchTerm = (valueSearch) => {
+  handleCategories = (item) => {
+    this.setState({ 
+      isCategories: true },
+      () => { this.handleSearchTerm(item)}
+    );
+  }
+
+  handleSearchTerm = (valueSearch, isCategories) => {
+    isCategories && this.setState({ isCategories: false })
     this.setState({valueSearch});
     this.showResultSearch(valueSearch)
   };
@@ -57,48 +64,47 @@ import { formatData, countPage, handleSearch } from '../ultils/helpers';
   resetList() {
     const { initialState } = this.state;
     this.updateView(initialState);
-  }
+  };
 
   showResultSearch (updateView) {
-    // .replace(/\s/g,'')
     if(!updateView) {
       this.resetList();
       return;
     };
 
-    const {chunk} = this.state;
-    console.log(chunk);
-    this.updateView(handleSearch(chunk, updateView));
+    if(!updateView.replace(/\s/g,'')) return;
 
-
+    const {chunk, isCategories} = this.state;
+    this.updateView(handleSearch(chunk, updateView, isCategories));
   };
-
   
-
   render() {
-    const {searchTerm, valueSearch, setIsCategories, notFound, list, currentPage, pages} = this.state;
+    const {searchTerm, valueSearch, notFound, list, currentPage, pages} = this.state;
+    const propsSearch = {searchTerm, valueSearch, handleCategories: this.handleCategories, handleSearchTerm: this.handleSearchTerm};
+    const propsPagination = {currentPage, pages, handleCurrentPage: this.handleCurrentPage};
+    const propsListItem = {handleSearchTerm: this.handleSearchTerm}
 
-    const propsSearch = {searchTerm, valueSearch, setIsCategories};
-    const propsPagination = {currentPage, pages};
     return (
       <>
-        <Search 
-          {...propsSearch}
-          valueSearch={valueSearch}
-          handleSearchTerm={this.handleSearchTerm}
-        />
+        <Search {...propsSearch} />
 
         {notFound && <p>no results found</p>}
         {
           !notFound &&
           <ul>
             {
-              list && list.map((item) => <ListItem key={item.id} {...item} setSearchTerm={this.setSearchTerm} setIsCategories={setIsCategories}/>)
+              list && list.map((item) => 
+                <ListItem
+                  key={item.id}
+                  {...item}
+                  {...propsListItem}
+                />
+              )
             }
           </ul>
         }
 
-        {!notFound && <Pagination {...propsPagination} handleCurrentPage={this.handleCurrentPage}/>}
+        {!notFound && <Pagination {...propsPagination} />}
     </>
     )
   }

@@ -7,7 +7,7 @@ const Search = ({valueSearch, handleSearchTerm, setIsCategories}) => {
         type="text" 
         placeholder="Search by App" 
         value={valueSearch} 
-        onChange={({target: { value}}) => handleSearchTerm(value)}
+        onChange={({target: { value}}) => handleSearchTerm(value, true)}
       />
     </header>
   )
