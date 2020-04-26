@@ -4,7 +4,6 @@ const Search = ({searchTerm, setSearchTerm, setIsCategories, setSearchByCategori
   const handleChange = event  => {
     setSearchTerm(event.target.value);
     setIsCategories(false);
-    setSearchByCategories('');
   };
 
   return (

@@ -5,7 +5,7 @@ const ListItem = ({
   description,
   categories,
   subscriptions,
-  setSearchByCategories,
+  setSearchTerm,
   setIsCategories
 }) => (
   <li>
@@ -17,7 +17,7 @@ const ListItem = ({
             <p>{description}</p>
           </div>
           <div className="tags">
-            { categories.map(item => <span onClick={() => { setSearchByCategories(item); setIsCategories(true)}} key={item}>{item} {'/'}</span>) }
+            { categories.map(item => <span onClick={() => { setSearchTerm(item); setIsCategories(true)}} key={item}>{item} {'/'}</span>) }
           </div>
         </div>
         <div className="box-info--footer">
