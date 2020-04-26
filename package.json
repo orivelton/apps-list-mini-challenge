@@ -2,7 +2,7 @@
   "name": "apps-list-mini-challenge",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://orivelton.github.io/rnters-calendar",
+  "homepage": "https://orivelton.github.io/apps-list-mini-challenge",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
