@@ -9,8 +9,6 @@ exports[`renders correctly 1`] = `
   </h2>
   <ul
     className="nav-menu"
-  >
-    0
-  </ul>
+  />
 </nav>
 `;
