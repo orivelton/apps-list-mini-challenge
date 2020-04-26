@@ -5,6 +5,7 @@ import ListItem from './ListItem';
 import Pagination from './Pagination';
 
 import { formatData, countPage, handleSearch } from '../ultils/helpers';
+import Nav from './Nav';
 
  class List extends Component {
   state = {
@@ -15,7 +16,8 @@ import { formatData, countPage, handleSearch } from '../ultils/helpers';
     valueSearch: '',
     currentPage: 1,
     isCategories: false,
-    initialState: []
+    initialState: [],
+    categoriesActive: null
   };
   
   componentDidMount () {
@@ -50,13 +52,15 @@ import { formatData, countPage, handleSearch } from '../ultils/helpers';
 
   handleCategories = (item) => {
     this.setState({ 
-      isCategories: true },
+      isCategories: true,
+      categoriesActive: item
+    },
       () => { this.handleSearchTerm(item)}
     );
   }
 
   handleSearchTerm = (valueSearch, isCategories) => {
-    isCategories && this.setState({ isCategories: false })
+    isCategories && this.setState({ isCategories: false, categoriesActive: null })
     this.setState({valueSearch});
     this.showResultSearch(valueSearch)
   };
@@ -79,31 +83,35 @@ import { formatData, countPage, handleSearch } from '../ultils/helpers';
   };
   
   render() {
-    const {searchTerm, valueSearch, notFound, list, currentPage, pages} = this.state;
+    const {searchTerm, valueSearch, notFound, list, currentPage, pages, initialState, categoriesActive} = this.state;
     const propsSearch = {searchTerm, valueSearch, handleCategories: this.handleCategories, handleSearchTerm: this.handleSearchTerm};
     const propsPagination = {currentPage, pages, handleCurrentPage: this.handleCurrentPage};
+    const propsNav = {initialState, handleCategories: this.handleCategories, categoriesActive};
 
     return (
       <>
-        <Search {...propsSearch} />
+        <Nav {...propsNav} />
+        <section className="apps-list">
+          <Search {...propsSearch} />
 
-        {notFound && <p>no results found</p>}
-        {
-          !notFound &&
-          <ul>
-            {
-              list && list.map((item) => 
-                <ListItem
-                  key={item.id}
-                  {...item}
-                  handleCategories={this.handleCategories}
-                />
-              )
-            }
-          </ul>
-        }
+          {notFound && <p>no results found</p>}
+          {
+            !notFound &&
+            <ul>
+              {
+                list && list.map((item) => 
+                  <ListItem
+                    key={item.id}
+                    {...item}
+                    handleCategories={this.handleCategories}
+                  />
+                )
+              }
+            </ul>
+          }
 
-        {(!notFound && pages !== 1) && <Pagination {...propsPagination} />}
+          {(!notFound && pages !== 1) && <Pagination {...propsPagination} />}
+        </section>
     </>
     )
   }
