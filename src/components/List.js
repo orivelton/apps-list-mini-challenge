@@ -34,22 +34,19 @@ const List = () => {
 
   const searchView = () => {
     searchByCategories && setSearchTerm(searchByCategories);
-
-    if(!searchTerm) {
-      initialList.length && updateView(initialList);
+    
+    if(!searchTerm && initialList.length) {
+      updateView(initialList);
       return;
     };
-    const search = chunk.flat().filter(({name, categories}) => {
-      if(searchByCategories) return categories.includes(searchByCategories);
-
-      return name.toLowerCase().includes(searchTerm.toLowerCase())
-    });
+    
+    const search = handleSearch();
 
     if(search.length) {
       updateView(search);
       setSearchByCategories('');
     } else {
-      (!searchByCategories && search.length) && setNotFound(true)
+      searchByCategories && setNotFound(true);
     }
   };
 
@@ -59,22 +56,30 @@ const List = () => {
   const updateView = (data) => {
     const result = formatData(data)
     const [firstPage] = result;
+    setNotFound(false);
     setChunk(result);
     setList(firstPage);
     countPage(data.length);
-  }
+    setCurrentPage(1);
+  };
 
+  const handleSearch = () => {
+    return chunk.flat().filter((
+      {name, categories}
+    ) => searchByCategories ? categories.includes(searchByCategories) : name.toLowerCase().includes(searchTerm.toLowerCase()));
+  };
 
   const handleCurrentPage = index => {
     setCurrentPage(index);
     setList(chunk[index - 1]);
-  }
+  };
 
   const propsSearch = {searchTerm, setSearchTerm};
   const propsPagination = {currentPage, handleCurrentPage, pages};
 
   return (
     <>
+      <p>{notFound}</p>
       <Search {...propsSearch} />
       {notFound && <p>no results found</p>}
       {
@@ -85,6 +90,8 @@ const List = () => {
           }
         </ul>
       }
+
+      {pages}
 
       {!notFound && <Pagination {...propsPagination} />}
     </>
