@@ -1,13 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { getApps } from '../api/get';
-import config from '../consts/config';
-import { formatData } from '../ultils/helpers';
+import { formatData, countPage, handleSearch } from '../ultils/helpers';
 import Search from './Search';
 import Pagination from './Pagination';
 import ListItem from './ListItem';
-
-const {pageSize} = config;
 
 const List = () => {
   const [list, setList] = useState([]);
@@ -29,9 +26,7 @@ const List = () => {
     loadData(); 
   },[]);
   
-  useEffect(() => {
-    searchView();
-  }, [searchTerm]);
+  useEffect(() => {searchView();}, [searchTerm]);
   
   const searchView = () => {
     if(!searchTerm.replace(/\s/g,'') && initialList.length && !isCategories) {
@@ -39,12 +34,9 @@ const List = () => {
       return;
     };
 
-    const search = handleSearch();
+    const search = handleSearch(chunk, isCategories, searchTerm);
     search.length ? updateView(search) : setNotFound(true);
   };
-
-  
-  const countPage = (dataLength) => setPages(Math.ceil( dataLength / pageSize));
 
   const updateView = (data) => {
     const result = formatData(data)
@@ -52,14 +44,8 @@ const List = () => {
     setNotFound(false);
     setChunk(result);
     setList(firstPage);
-    countPage(data.length);
+    countPage(data.length, setPages);
     setCurrentPage(1);
-  };
-
-  const handleSearch = () => {
-    return chunk.flat().filter((
-      {name, categories}
-    ) => isCategories ? categories.includes(searchTerm) : name.toLowerCase().includes(searchTerm.toLowerCase()));
   };
 
   const handleCurrentPage = index => {
