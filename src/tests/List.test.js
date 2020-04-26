@@ -2,7 +2,15 @@ import React from 'react';
 import List from '../components/List';
 import { shallow } from 'enzyme';
 
-test('renders correctly', () => {
-  const tree = shallow(<List />);
-  expect(tree).toMatchSnapshot();
-});
+describe('components/List', () => {
+  const component = shallow(<List />);
+  test('Snapshot', () => {
+    expect(component).toMatchSnapshot();
+  });
+
+  test('should exist', () => {
+    expect(component).not.toBeNull();
+  });
+})
+
+

@@ -22,6 +22,8 @@ Object.defineProperty(Array.prototype, 'chunk', {
 });
 
 const formatData = data => {
+  if(!data.length) return [];
+
   const formated = data.map(item => {
     const {subscriptions, categories} = item;
     const total = subscriptions.reduce((acc, cur) => acc + cur.price, 0);

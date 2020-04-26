@@ -74,8 +74,8 @@ import { formatData, countPage, handleSearch } from '../ultils/helpers';
 
     if(!updateView.replace(/\s/g,'')) return;
 
-    const {chunk, isCategories} = this.state;
-    this.updateView(handleSearch(chunk, updateView, isCategories));
+    const {initialState, isCategories} = this.state;
+    this.updateView(handleSearch(initialState, updateView, isCategories));
   };
   
   render() {
