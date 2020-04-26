@@ -17,6 +17,7 @@ const List = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [initialList, setInitialList] = useState([]);
   const [searchByCategories, setSearchByCategories] = useState('');
+  const [isCategories, setIsCategories] = useState(false);
   
   useEffect(() => { 
     const loadData = async () => {
@@ -31,23 +32,19 @@ const List = () => {
   useEffect(() => {
     searchView();
   }, [searchTerm, searchByCategories]);
-
+  
   const searchView = () => {
-    searchByCategories && setSearchTerm(searchByCategories);
-    
-    if(!searchTerm && initialList.length) {
+    if(!searchTerm.replace(/\s/g,'') && initialList.length && !isCategories) {
       updateView(initialList);
       return;
     };
-    
-    const search = handleSearch();
 
-    if(search.length) {
-      updateView(search);
-      setSearchByCategories('');
-    } else {
-      searchByCategories && setNotFound(true);
-    }
+    console.log(searchByCategories)
+
+    isCategories && setSearchTerm(searchByCategories);
+
+    const search = handleSearch();
+    search.length ? updateView(search) : setNotFound(true);
   };
 
   
@@ -74,24 +71,21 @@ const List = () => {
     setList(chunk[index - 1]);
   };
 
-  const propsSearch = {searchTerm, setSearchTerm};
+  const propsSearch = {searchTerm, setSearchTerm, setIsCategories, setSearchByCategories};
   const propsPagination = {currentPage, handleCurrentPage, pages};
 
   return (
     <>
-      <p>{notFound}</p>
       <Search {...propsSearch} />
       {notFound && <p>no results found</p>}
       {
         !notFound &&
         <ul>
           {
-            list && list.map((item) => <ListItem key={item.id} {...item} setSearchByCategories={setSearchByCategories} />)
+            list && list.map((item) => <ListItem key={item.id} {...item} setSearchByCategories={setSearchByCategories} setIsCategories={setIsCategories}/>)
           }
         </ul>
       }
-
-      {pages}
 
       {!notFound && <Pagination {...propsPagination} />}
     </>
