@@ -1,77 +1,112 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from 'react';
+import React, { Component } from 'react';
 import { getApps } from '../api/get';
-import { formatData, countPage, handleSearch } from '../ultils/helpers';
 import Search from './Search';
-import Pagination from './Pagination';
 import ListItem from './ListItem';
+import Pagination from './Pagination';
 
-const List = () => {
-  const [list, setList] = useState([]);
-  const [pages, setPages] = useState();
-  const [chunk, setChunk] = useState([]);
-  const [notFound, setNotFound] =useState(false);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [currentPage, setCurrentPage] = useState(1);
-  const [initialList, setInitialList] = useState([]);
-  const [isCategories, setIsCategories] = useState(false);
+import { formatData, countPage, handleSearch } from '../ultils/helpers';
+
+ class List extends Component {
+  state = {
+    list: [],
+    pages: 0,
+    chunk: [],
+    notFound: false,
+    valueSearch: '',
+    currentPage: 1,
+    isCategories: false,
+    initialState: []
+  };
   
-  useEffect(() => { 
+  componentDidMount () {
     const loadData = async () => {
       const data = await getApps();
-      updateView(data);
-      setInitialList(data);
+      this.updateView(data);
+      this.setState({initialState: data})
     }
     
     loadData(); 
-  },[]);
-  
-  useEffect(() => {searchView();}, [searchTerm]);
-  
-  const searchView = () => {
-    if(!searchTerm.replace(/\s/g,'') && initialList.length && !isCategories) {
-      updateView(initialList);
+  };
+
+  updateView(data) {
+    const result = formatData(data)
+    const [firstPage] = result;
+    this.setState({
+      list : firstPage,
+      pages: countPage(data.length),
+      chunk: result,
+      notFound: !firstPage
+    });
+  };
+
+  handleCurrentPage = (index) => {
+    const { chunk } = this.state;
+
+    this.setState({
+      list: chunk[index - 1],
+      currentPage: index
+    });
+  };
+
+  handleCategories = (item) => {
+    this.setState({ 
+      isCategories: true },
+      () => { this.handleSearchTerm(item)}
+    );
+  }
+
+  handleSearchTerm = (valueSearch, isCategories) => {
+    isCategories && this.setState({ isCategories: false })
+    this.setState({valueSearch});
+    this.showResultSearch(valueSearch)
+  };
+
+  resetList() {
+    const { initialState } = this.state;
+    this.updateView(initialState);
+  };
+
+  showResultSearch (updateView) {
+    if(!updateView) {
+      this.resetList();
       return;
     };
 
-    const search = handleSearch(chunk, isCategories, searchTerm);
-    search.length ? updateView(search) : setNotFound(true);
+    if(!updateView.replace(/\s/g,'')) return;
+
+    const {initialState, isCategories} = this.state;
+    this.updateView(handleSearch(initialState, updateView, isCategories));
   };
+  
+  render() {
+    const {searchTerm, valueSearch, notFound, list, currentPage, pages} = this.state;
+    const propsSearch = {searchTerm, valueSearch, handleCategories: this.handleCategories, handleSearchTerm: this.handleSearchTerm};
+    const propsPagination = {currentPage, pages, handleCurrentPage: this.handleCurrentPage};
 
-  const updateView = (data) => {
-    const result = formatData(data)
-    const [firstPage] = result;
-    setNotFound(false);
-    setChunk(result);
-    setList(firstPage);
-    countPage(data.length, setPages);
-    setCurrentPage(1);
-  };
+    return (
+      <>
+        <Search {...propsSearch} />
 
-  const handleCurrentPage = index => {
-    setCurrentPage(index);
-    setList(chunk[index - 1]);
-  };
+        {notFound && <p>no results found</p>}
+        {
+          !notFound &&
+          <ul>
+            {
+              list && list.map((item) => 
+                <ListItem
+                  key={item.id}
+                  {...item}
+                  handleCategories={this.handleCategories}
+                />
+              )
+            }
+          </ul>
+        }
 
-  const propsSearch = {searchTerm, setSearchTerm, setIsCategories};
-  const propsPagination = {currentPage, handleCurrentPage, pages};
-
-  return (
-    <>
-      <Search {...propsSearch} />
-      {notFound && <p>no results found</p>}
-      {
-        !notFound &&
-        <ul>
-          {
-            list && list.map((item) => <ListItem key={item.id} {...item} setSearchTerm={setSearchTerm} setIsCategories={setIsCategories}/>)
-          }
-        </ul>
-      }
-
-      {!notFound && <Pagination {...propsPagination} />}
+        {(!notFound && pages !== 1) && <Pagination {...propsPagination} />}
     </>
-  )
+    )
+  }
 };
 
 export default List;

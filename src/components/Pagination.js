@@ -9,9 +9,9 @@ const Pagination = ({currentPage, handleCurrentPage, pages}) => {
       {
         pages && [...Array(pages)].map((item, index) => (
           <li 
+            onClick={() => { handleCurrentPage(index) }}
             key={`${index}${item}`}
             className={currentPage === (index + 1) ? 'active' : ''}
-            onClick={() => { handleCurrentPage(index)}}
           >
             <button>{++index}</button>
           </li>
