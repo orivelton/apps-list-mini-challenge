@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/rnters-calendar/static/css/main.9789ebc0.chunk.css",
-    "main.js": "/rnters-calendar/static/js/main.66b2c656.chunk.js",
-    "main.js.map": "/rnters-calendar/static/js/main.66b2c656.chunk.js.map",
-    "runtime-main.js": "/rnters-calendar/static/js/runtime-main.7602e8cc.js",
-    "runtime-main.js.map": "/rnters-calendar/static/js/runtime-main.7602e8cc.js.map",
-    "static/js/2.9a56bd10.chunk.js": "/rnters-calendar/static/js/2.9a56bd10.chunk.js",
-    "static/js/2.9a56bd10.chunk.js.map": "/rnters-calendar/static/js/2.9a56bd10.chunk.js.map",
-    "index.html": "/rnters-calendar/index.html",
-    "precache-manifest.42c7c37de03902f78e47cd29ecf39e5a.js": "/rnters-calendar/precache-manifest.42c7c37de03902f78e47cd29ecf39e5a.js",
-    "service-worker.js": "/rnters-calendar/service-worker.js",
-    "static/css/main.9789ebc0.chunk.css.map": "/rnters-calendar/static/css/main.9789ebc0.chunk.css.map",
-    "static/js/2.9a56bd10.chunk.js.LICENSE.txt": "/rnters-calendar/static/js/2.9a56bd10.chunk.js.LICENSE.txt"
+    "main.css": "/apps-list-mini-challenge/static/css/main.9789ebc0.chunk.css",
+    "main.js": "/apps-list-mini-challenge/static/js/main.b443ae80.chunk.js",
+    "main.js.map": "/apps-list-mini-challenge/static/js/main.b443ae80.chunk.js.map",
+    "runtime-main.js": "/apps-list-mini-challenge/static/js/runtime-main.daf60f42.js",
+    "runtime-main.js.map": "/apps-list-mini-challenge/static/js/runtime-main.daf60f42.js.map",
+    "static/js/2.9a56bd10.chunk.js": "/apps-list-mini-challenge/static/js/2.9a56bd10.chunk.js",
+    "static/js/2.9a56bd10.chunk.js.map": "/apps-list-mini-challenge/static/js/2.9a56bd10.chunk.js.map",
+    "index.html": "/apps-list-mini-challenge/index.html",
+    "precache-manifest.d3772186df1d38b36178947f72f76a62.js": "/apps-list-mini-challenge/precache-manifest.d3772186df1d38b36178947f72f76a62.js",
+    "service-worker.js": "/apps-list-mini-challenge/service-worker.js",
+    "static/css/main.9789ebc0.chunk.css.map": "/apps-list-mini-challenge/static/css/main.9789ebc0.chunk.css.map",
+    "static/js/2.9a56bd10.chunk.js.LICENSE.txt": "/apps-list-mini-challenge/static/js/2.9a56bd10.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.7602e8cc.js",
+    "static/js/runtime-main.daf60f42.js",
     "static/js/2.9a56bd10.chunk.js",
     "static/css/main.9789ebc0.chunk.css",
-    "static/js/main.66b2c656.chunk.js"
+    "static/js/main.b443ae80.chunk.js"
   ]
 }
