@@ -2,6 +2,8 @@
 
 [Demo](https://orivelton.github.io/apps-list-mini-challenge/)
 
+![demo](public/demo.gif)
+
 ## Tasks
 
 - [X] List all the apps
