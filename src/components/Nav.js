@@ -27,7 +27,7 @@ const Nav = ({initialState, handleCategories, categoriesActive}) => {
             <li key={item} >
               <button
                 className={active === item ? 'active' : ''}
-                onClick={e => handleClick(item)}>
+                onClick={() => handleClick(item)}>
                 {item}
               </button>
             </li>
