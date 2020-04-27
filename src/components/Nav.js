@@ -13,9 +13,8 @@ const Nav = ({initialState, handleCategories, categoriesActive}) => {
   },[categoriesActive]);
 
 
-  const handleClick = (e, item) => {
+  const handleClick = item => {
     setActive(item);
-    e.preventDefault();
     handleCategories(item);
   }
 
@@ -26,10 +25,9 @@ const Nav = ({initialState, handleCategories, categoriesActive}) => {
         {
           categories.length > 0 && categories.map(item => (
             <li key={item} >
-              <button 
-                href="/"
+              <button
                 className={active === item ? 'active' : ''}
-                onClick={e => handleClick(e, item)}>
+                onClick={() => handleClick(item)}>
                 {item}
               </button>
             </li>
