@@ -11,7 +11,7 @@
 - [x] Allow filtering of apps when we click on a category
 - [X] Apps should be sorted by ascending order of the sum of the plans price
 
-## Tree of project
+## Project tree
 
 ```shell
 .
